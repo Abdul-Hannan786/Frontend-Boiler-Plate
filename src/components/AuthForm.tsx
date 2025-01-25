@@ -73,7 +73,7 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
       if (type === "sign-up") {
         response = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`,
-          values
+          values, {withCredentials: true,}
         );
       } else if (type === "sign-in") {
         response = await axios.post(
@@ -81,7 +81,8 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
           {
             email: values.email,
             password: values.password,
-          }
+          },
+          {withCredentials: true,}
         );
       }
       setLoggedInUser(response?.data.data.user);
@@ -105,7 +106,7 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="min-w-[320px] w-[450px]">
+      <Card className="min-w-[320px] w-[320px] sm:w-[400px] lg:w-[450px]">
         <CardHeader>
           <CardTitle className="form-title">
             {type === "sign-in" ? "Sign In" : "Sign Up"}
