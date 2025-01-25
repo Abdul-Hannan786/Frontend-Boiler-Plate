@@ -105,7 +105,7 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <Card className="min-w-[320px]">
+      <Card className="min-w-[320px] w-[450px]">
         <CardHeader>
           <CardTitle className="form-title">
             {type === "sign-in" ? "Sign In" : "Sign Up"}
