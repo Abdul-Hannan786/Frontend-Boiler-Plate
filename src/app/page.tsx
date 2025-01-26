@@ -53,6 +53,7 @@ export default function Home() {
       name,
     });
     try{
+      console.log(process.env.NEXT_PUBLIC_BASE_URL)
       const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`, {
         fullname: name,
         email,
