@@ -16,7 +16,7 @@ export default function Home() {
   const [isUserInfoFormOpen, setIsUserInfoFormOpen] = useState(false);
   const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const setUserFromStore = useUserStore((state) => state.saveUser);
-  const router = useRouter()
+  const router = useRouter();
 
   const handleCardClick = (category: (typeof loanCategories)[0]) => {
     setSelectedCategory(category);
@@ -27,14 +27,14 @@ export default function Home() {
   };
 
   type LoanDetails = {
-    subcategory: string,
-      initialDeposit: number,
-      loanAmount: number,
-      loanPeriod: number,
-      totalLoan: number,
-      monthlyPayment: number,
-      totalPayment: number
-  }
+    subcategory: string;
+    initialDeposit: number;
+    loanAmount: number;
+    loanPeriod: number;
+    totalLoan: number;
+    monthlyPayment: number;
+    totalPayment: number;
+  };
 
   const handleProceed = (details: LoanDetails) => {
     setLoanDetails(details);
@@ -45,33 +45,40 @@ export default function Home() {
     setIsUserInfoFormOpen(false);
   };
 
-  const handleUserInfoSubmit = async (email: string, nic: string, name: string) => {
+  const handleUserInfoSubmit = async (
+    email: string,
+    nic: string,
+    name: string
+  ) => {
     console.log("Loan application submitted:", {
       ...loanDetails,
       email,
       nic,
       name,
     });
-    try{
+    try {
       console.log(process.env.NEXT_PUBLIC_BASE_URL)
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`, {
-        fullname: name,
-        email,
-        cnic:nic,
-        loanDetails
-      })
-      toast.success(response.data.msg)
-      console.log(response.data.data)
-      router.push("/login")
-      setUserFromStore(response.data.data)
-    }
-    catch(err){
-      console.log(err)
+      const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`;
+      console.log(apiUrl);
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`,
+        {
+          fullname: name,
+          email,
+          cnic: nic,
+          loanDetails,
+        }
+      );
+      toast.success(response.data.msg);
+      console.log(response.data.data);
+      router.push("/login");
+      setUserFromStore(response.data.data);
+    } catch (err) {
+      console.log(err);
     }
     setIsUserInfoFormOpen(false);
     setSelectedCategory(null);
     setLoanDetails(null);
-  
   };
 
   return (
@@ -110,8 +117,7 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div>
-            </div>
+            <div></div>
           </div>
         </div>
       </main>
