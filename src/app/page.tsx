@@ -14,7 +14,7 @@ export default function Home() {
     (typeof loanCategories)[0] | null
   >(null);
   const [isUserInfoFormOpen, setIsUserInfoFormOpen] = useState(false);
-  const [loanDetails, setLoanDetails] = useState<any>(null);
+  const [loanDetails, setLoanDetails] = useState<LoanDetails | null>(null);
   const setUserFromStore = useUserStore((state) => state.saveUser);
   const router = useRouter()
 
@@ -26,7 +26,17 @@ export default function Home() {
     setSelectedCategory(null);
   };
 
-  const handleProceed = (details: any) => {
+  type LoanDetails = {
+    subcategory: string,
+      initialDeposit: number,
+      loanAmount: number,
+      loanPeriod: number,
+      totalLoan: number,
+      monthlyPayment: number,
+      totalPayment: number
+  }
+
+  const handleProceed = (details: LoanDetails) => {
     setLoanDetails(details);
     setIsUserInfoFormOpen(true);
   };
