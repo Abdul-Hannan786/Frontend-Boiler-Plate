@@ -26,14 +26,6 @@ type AuthFormType = "sign-in" | "sign-up";
 
 const authFormSchema = (formType: AuthFormType) => {
   return z.object({
-    fullname:
-      formType === "sign-up"
-        ? z
-            .string()
-            .nonempty("Name is required")
-            .min(3, "Name must be at least 3 characters long")
-            .max(50, "Name must not exceed 50 characters")
-        : z.string().optional(),
     email: z.string().email("Enter a valid email address"),
     password: z
       .string()
@@ -43,7 +35,6 @@ const authFormSchema = (formType: AuthFormType) => {
 };
 
 type UserState = {
-  fullname?: string;
   email: string;
   password: string;
   admin: boolean;
@@ -60,7 +51,6 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullname: "",
       email: "",
       password: "",
     },
@@ -70,19 +60,14 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
     setIsLoading(true);
     try {
       let response;
-      if (type === "sign-up") {
-        response = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`,
-          values, {withCredentials: true,}
-        );
-      } else if (type === "sign-in") {
+      if (type === "sign-in") {
         response = await axios.post(
           `${process.env.NEXT_PUBLIC_BASE_URL}/auth/login`,
           {
             email: values.email,
             password: values.password,
           },
-          {withCredentials: true,}
+          { withCredentials: true }
         );
       }
       setLoggedInUser(response?.data.data.user);

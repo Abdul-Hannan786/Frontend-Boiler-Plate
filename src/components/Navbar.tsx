@@ -12,12 +12,12 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const handle = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/profile`, {
-      withCredentials: true, // Include cookies with the request
-    });
-    console.log(response.data)
-  };
+  // const handle = async () => {
+  //   const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/profile`, {
+  //     withCredentials: true, // Include cookies with the request
+  //   });
+  //   console.log(response.data)
+  // };
 
   return (
     <header className="sticky top-0 z-50">
@@ -29,9 +29,6 @@ const Navbar = () => {
             </span>
           </a>
           <div className="flex items-center lg:order-2">
-            <Button className="bg-destructive" onClick={handle}>
-              Logout
-            </Button>
             <button
               type="button"
               className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -90,22 +87,6 @@ const Navbar = () => {
                   className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Company
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Marketplace
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
-                  Features
                 </Link>
               </li>
               <li>
