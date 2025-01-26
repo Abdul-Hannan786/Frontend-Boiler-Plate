@@ -106,7 +106,6 @@ const Info = () => {
                 name="address"
                 value={formData.address}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -117,7 +116,6 @@ const Info = () => {
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
-                required
               />
             </div>
           </CardContent>
@@ -135,7 +133,6 @@ const Info = () => {
                 name="guarantor1.name"
                 value={formData.guarantor1.name}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -146,7 +143,6 @@ const Info = () => {
                 type="email"
                 value={formData.guarantor1.email}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -156,7 +152,6 @@ const Info = () => {
                 name="guarantor1.location"
                 value={formData.guarantor1.location}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -166,7 +161,6 @@ const Info = () => {
                 name="guarantor1.cnic"
                 value={formData.guarantor1.cnic}
                 onChange={handleChange}
-                required
               />
             </div>
           </CardContent>
@@ -184,7 +178,6 @@ const Info = () => {
                 name="guarantor2.name"
                 value={formData.guarantor2.name}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -195,7 +188,6 @@ const Info = () => {
                 type="email"
                 value={formData.guarantor2.email}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -205,7 +197,6 @@ const Info = () => {
                 name="guarantor2.location"
                 value={formData.guarantor2.location}
                 onChange={handleChange}
-                required
               />
             </div>
             <div className="space-y-2">
@@ -215,7 +206,6 @@ const Info = () => {
                 name="guarantor2.cnic"
                 value={formData.guarantor2.cnic}
                 onChange={handleChange}
-                required
               />
             </div>
           </CardContent>
