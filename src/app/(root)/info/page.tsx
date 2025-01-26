@@ -5,44 +5,59 @@ import Link from "next/link";
 
 import { useState } from "react";
 
+interface Guarantor {
+  name: string;
+  email: string;
+  location: string;
+  cnic: string;
+}
+
+interface FormData {
+  address: string;
+  phone: string;
+  guarantor1: Guarantor;
+  guarantor2: Guarantor;
+}
+
 const Info = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     address: "",
     phone: "",
-    guarantor1: {
-      name: "",
-      email: "",
-      location: "",
-      cnic: "",
-    },
-    guarantor2: {
-      name: "",
-      email: "",
-      location: "",
-      cnic: "",
-    },
+    guarantor1: { name: "", email: "", location: "", cnic: "" },
+    guarantor2: { name: "", email: "", location: "", cnic: "" },
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
     if (name.startsWith("guarantor1") || name.startsWith("guarantor2")) {
       const [guarantor, field] = name.split(".");
-      setFormData({
-        ...formData,
-        [guarantor]: {
-          ...formData[guarantor],
-          [field]: value,
-        },
+
+      // TypeScript understands that we are dealing with the right part of the state
+      setFormData((prevFormData) => {
+        // Ensure the guarantor field is of type `Guarantor` before spreading
+        const updatedGuarantor = prevFormData[guarantor as keyof FormData] as Guarantor;
+
+        return {
+          ...prevFormData,
+          [guarantor]: {
+            ...updatedGuarantor, // Safely spread the existing guarantor data
+            [field]: value,
+          },
+        };
       });
     } else {
-      setFormData({ ...formData, [name]: value });
+      // Handle other fields
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData); // You can handle the form submission here, e.g., sending data to an API
+    console.log(formData); // Handle form submission, e.g., send data to an API
   };
 
   return (

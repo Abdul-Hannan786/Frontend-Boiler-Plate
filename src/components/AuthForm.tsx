@@ -24,7 +24,7 @@ import { useRouter } from "next/navigation";
 
 type AuthFormType = "sign-in" | "sign-up";
 
-const authFormSchema = (formType: AuthFormType) => {
+const authFormSchema = () => {
   return z.object({
     email: z.string().email("Enter a valid email address"),
     password: z
@@ -34,20 +34,14 @@ const authFormSchema = (formType: AuthFormType) => {
   });
 };
 
-type UserState = {
-  email: string;
-  password: string;
-  admin: boolean;
-  _id: string;
-};
 
 const AuthForm = ({ type }: { type: AuthFormType }) => {
   const [isLoading, setIsLoading] = useState(false);
   const setUserFromStore = useUserStore((state) => state.saveUser);
-  const [loggedInUser, setLoggedInUser] = useState<UserState>();
+
   const router = useRouter();
 
-  const formSchema = authFormSchema(type);
+  const formSchema = authFormSchema();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -70,7 +64,7 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
           { withCredentials: true }
         );
       }
-      setLoggedInUser(response?.data.data.user);
+
       setUserFromStore(response?.data.data.user);
       toast.success(response?.data.msg);
       router.push("/");
@@ -100,23 +94,6 @@ const AuthForm = ({ type }: { type: AuthFormType }) => {
         <CardContent>
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              {type === "sign-up" && (
-                <FormField
-                  control={form.control}
-                  name="fullname"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="shad-form-label">
-                        Full Name
-                      </FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter Your Full Name" {...field} />
-                      </FormControl>
-                      <FormMessage className="text-destructive" />
-                    </FormItem>
-                  )}
-                />
-              )}
               <FormField
                 control={form.control}
                 name="email"

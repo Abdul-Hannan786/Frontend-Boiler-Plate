@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
-import { Button } from "./ui/button";
-import axios from "axios";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

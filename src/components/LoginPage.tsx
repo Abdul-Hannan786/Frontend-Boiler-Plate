@@ -30,7 +30,7 @@ const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [isFirstLogin, setIsFirstLogin] = useState(false);
   const [newPassword, setNewPassword] = useState("");
-  const user = useUserStore((state) => state.user);
+  // const user = useUserStore((state) => state.user);
   const router = useRouter()
 
   // Handle login form submit
@@ -57,24 +57,24 @@ const LoginPage: React.FC = () => {
   };
 
   // Handle password change
-  const handlePasswordChange = async () => {
-    try {
-      const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/auth/change-password`,
-        {
-          userId: user._id,
-          newPassword,
-        }
-      );
-      alert("Password updated successfully!");
-      setIsFirstLogin(false);
-      router.push("/info")
-       // Close the modal and mark the firstLogin flag as false
-    } catch (error) {
-      console.error("Error updating password:", error);
-      alert("Error updating password");
-    }
-  };
+  // const handlePasswordChange = async () => {
+  //   try {
+  //     const response = await axios.post(
+  //       `${process.env.NEXT_PUBLIC_BASE_URL}/auth/change-password`,
+  //       {
+  //         userId: user._id,
+  //         newPassword,
+  //       }
+  //     );
+  //     alert("Password updated successfully!");
+  //     setIsFirstLogin(false);
+  //     router.push("/info")
+  //      // Close the modal and mark the firstLogin flag as false
+  //   } catch (error) {
+  //     console.error("Error updating password:", error);
+  //     alert("Error updating password");
+  //   }
+  // };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-50 px-4">
@@ -160,7 +160,6 @@ const LoginPage: React.FC = () => {
             <DialogFooter>
               <Button
                 className="bg-green-600 hover:bg-green-700 text-white"
-                onClick={handlePasswordChange}
               >
                 Change Password
               </Button>

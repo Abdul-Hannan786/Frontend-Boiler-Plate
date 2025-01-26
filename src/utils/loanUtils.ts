@@ -45,3 +45,10 @@ export const formatCurrency = (amount: number) => {
   return new Intl.NumberFormat("en-PK", { style: "currency", currency: "PKR" }).format(amount)
 }
 
+export const calculateProgress = (loanAmount: number, maxLoan: number) => {
+  // Ensure that loanAmount and maxLoan are both valid numbers
+  if (maxLoan <= 0 || loanAmount <= 0) return 0
+
+  // Calculate progress percentage based on loan amount and max loan
+  return Math.min((loanAmount / maxLoan) * 100, 100)
+}

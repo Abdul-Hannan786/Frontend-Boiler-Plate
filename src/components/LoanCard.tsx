@@ -10,7 +10,7 @@ interface LoanCardProps {
   onClick: () => void
 }
 
-const LoanCard: React.FC<LoanCardProps> = ({ id, name, maxLoan, loanPeriod, onClick }) => {
+const LoanCard: React.FC<LoanCardProps> = ({ name, maxLoan, loanPeriod, onClick }) => {
   return (
     <Card className="hover:shadow-lg transition-shadow duration-300">
       <CardContent className="p-6">

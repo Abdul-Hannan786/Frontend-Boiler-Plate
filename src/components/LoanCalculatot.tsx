@@ -1,5 +1,5 @@
 import type React from "react"
-import { loanCategories, calculateLoan, formatCurrency, calculateProgress } from "../utils/loanUtils"
+import { loanCategories,  formatCurrency, calculateProgress } from "../utils/loanUtils"
 
 interface LoanCalculatorProps {
   selectedCategory: string
@@ -14,7 +14,6 @@ interface LoanCalculatorProps {
 
 const LoanCalculator: React.FC<LoanCalculatorProps> = ({
   selectedCategory,
-  selectedSubcategory,
   initialDeposit,
   loanAmount,
   loanPeriod,
@@ -24,7 +23,7 @@ const LoanCalculator: React.FC<LoanCalculatorProps> = ({
 }) => {
   const selectedCategoryData = loanCategories.find((category) => category.name === selectedCategory)
 
-  const { totalLoan, monthlyPayment, totalPayment } = calculateLoan(initialDeposit, loanAmount, loanPeriod)
+  // const { totalLoan, monthlyPayment, totalPayment } = calculateLoan(initialDeposit, loanAmount, loanPeriod)
 
   const loanProgress = calculateProgress(loanAmount, selectedCategoryData?.maxLoan || loanAmount)
 
