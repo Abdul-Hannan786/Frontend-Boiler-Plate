@@ -57,7 +57,7 @@ export default function Home() {
       name,
     });
     try {
-      console.log(process.env.NEXT_PUBLIC_BASE_URL)
+      console.log(process.env.NEXT_PUBLIC_BASE_URL);
       const apiUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/auth/register`;
       console.log(apiUrl);
       const response = await axios.post(
@@ -73,8 +73,15 @@ export default function Home() {
       console.log(response.data.data);
       router.push("/login");
       setUserFromStore(response.data.data);
-    } catch (err) {
-      console.log(err);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const errorMsg =
+          error.response?.data?.msg || "An error occurred. Please try again.";
+        toast.error(errorMsg);
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
+        console.error(error);
+      }
     }
     setIsUserInfoFormOpen(false);
     setSelectedCategory(null);
